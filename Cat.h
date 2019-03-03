@@ -1,8 +1,8 @@
 #ifndef CAT_H
 #define CAT_H
 
-#include <Animal.h>
-#include <Carnivore.h>
+#include "Animal.h"
+#include "Carnivore.h"
 
 #include <SFML/Graphics.hpp>
 

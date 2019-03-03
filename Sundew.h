@@ -1,8 +1,8 @@
 #ifndef SUNDEW_H
 #define SUNDEW_H
 
-#include <Plant.h>
-#include <Carnivore.h>
+#include "Plant.h"
+#include "Carnivore.h"
 
 #include <SFML/Graphics.hpp>
 

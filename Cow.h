@@ -1,8 +1,8 @@
 #ifndef COW_H
 #define COW_H
 
-#include <Animal.h>
-#include <Herbivore.h>
+#include "Animal.h"
+#include "Herbivore.h"
 
 #include <SFML/Graphics.hpp>
 
