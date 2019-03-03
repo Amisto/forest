@@ -1,7 +1,7 @@
 #ifndef PLANT_H
 #define PLANT_H
 
-#include <Creature.h>
+#include "Creature.h"
 
 // Plants stand and grow.
 // They do not care where the food comes from.

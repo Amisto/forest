@@ -1,8 +1,8 @@
 #ifndef FLOWER_H
 #define FLOWER_H
 
-#include <Plant.h>
-#include <Herbivore.h>
+#include "Plant.h"
+#include "Herbivore.h"
 
 #include <SFML/Graphics.hpp>
 

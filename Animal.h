@@ -1,7 +1,7 @@
 #ifndef ANIMAL_H
 #define ANIMAL_H
 
-#include <Creature.h>
+#include "Creature.h"
 
 // Animals can walk and talk.
 // They have brains, but they have no idea how to use it.
