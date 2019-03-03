@@ -21,7 +21,10 @@ Cow::Cow(double m, double b, int _x, int _y) : Animal(m, b, _x, _y)
 
 Cow::~Cow()
 {
-    delete texture;
+    if(texture) {
+        delete texture;
+        texture = NULL;
+    }
 }
 
 void Cow::talk()
