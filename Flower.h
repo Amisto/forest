@@ -16,7 +16,7 @@ class Flower : public Plant
         Flower();
         Flower(double m);
         Flower(double m, int _x, int _y);
-        virtual ~Flower();
+        ~Flower();
         bool bloom;
         void setSprite();
     private:

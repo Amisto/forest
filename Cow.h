@@ -19,7 +19,7 @@ class Cow : public Animal, public Herbivore
         Cow();
         Cow(double m, double b);
         Cow(double m, double b, int _x, int _y);
-        virtual ~Cow();
+        ~Cow();
         void talk();
         void setSprite();
     private:

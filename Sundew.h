@@ -18,7 +18,7 @@ class Sundew : public Plant, public Carnivore
         Sundew();
         Sundew(double m);
         Sundew(double m, int _x, int _y);
-        virtual ~Sundew();
+        ~Sundew();
         void setSprite();
     private:
         static sf::Texture *texture;
