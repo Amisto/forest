@@ -18,7 +18,7 @@ class Flower : public Plant
         Flower(double m, int _x, int _y);
         ~Flower();
         bool bloom;
-        void setSprite();
+        void setSprite() override;
     private:
         static sf::Texture *texture;
 };

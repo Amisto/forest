@@ -19,8 +19,8 @@ class Animal : public Creature
         Animal(double m, double b, int _x, int _y);
         ~Animal();
 
-        void set_brain(double b) {brain = b;}
-        double get_brain() {return brain;}
+        virtual void set_brain(double b) final {brain = b;}
+        virtual double get_brain() final {return brain;}
 
         virtual void walk(Forest* f);
         virtual void talk() {}
