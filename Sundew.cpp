@@ -20,6 +20,10 @@ Sundew::Sundew(double m, int _x, int _y): Plant(m, _x, _y)
 
 Sundew::~Sundew()
 {
+    if(texture) {
+        delete texture;
+        texture = NULL;
+    }
 }
 
 // Sundews wait for insects but to no avail.

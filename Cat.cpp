@@ -12,6 +12,10 @@ Cat::Cat()
 
 Cat::~Cat()
 {
+    if(texture) {
+        delete texture;
+        texture = NULL;
+    }
 }
 
 

@@ -23,6 +23,10 @@ Flower::Flower(double m, int _x, int _y): Plant(m, _x, _y)
 
 Flower::~Flower()
 {
+    if(texture) {
+        delete texture;
+        texture = NULL;
+    }
 }
 
 // Flowers listen to the blowing wind.
