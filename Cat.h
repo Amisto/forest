@@ -21,9 +21,9 @@ class Cat : public Animal, public Carnivore
         Cat();
         Cat(double m, double b);
         Cat(double m, double b, int _x, int _y);
-        virtual ~Cat();
-        void talk();
-        void setSprite();
+        ~Cat();
+        void talk() override;
+        void setSprite() override;
     private:
         static sf::Texture *texture;
 

@@ -19,9 +19,9 @@ class Cow : public Animal, public Herbivore
         Cow();
         Cow(double m, double b);
         Cow(double m, double b, int _x, int _y);
-        virtual ~Cow();
-        void talk();
-        void setSprite();
+        ~Cow();
+        void talk() override;
+        void setSprite() override;
     private:
         static sf::Texture *texture;
 };

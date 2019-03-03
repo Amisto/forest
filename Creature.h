@@ -20,15 +20,15 @@ class Creature
         Creature(double m, int _x, int _y);
         virtual ~Creature(); //You know why is this virtual, right?
 
-        void set_mass(double m) {mass = m;}
-        double get_mass();
-        void set_x(int _x) {x = _x;}
-        int get_x() {return x;}
-        void set_y(int _y) {y = _y;}
-        int get_y() {return y;}
+        virtual void set_mass(double m) final {mass = m;}
+        virtual double get_mass() final;
+        virtual void set_x(int _x) final {x = _x;}
+        virtual int get_x() final {return x;}
+        virtual void set_y(int _y) final {y = _y;}
+        virtual int get_y() final {return y;}
 
         virtual void setSprite() = 0;
-        sf::Sprite* getSprite() {return s;}
+        virtual sf::Sprite* getSprite() final {return s;}
     private:
         double mass;
         double ass;
