@@ -25,7 +25,7 @@ Cat::Cat(double m, double b, int _x, int _y) : Animal(m, b, _x, _y)
 
 void Cat::talk()
 {
-    cout <<"Mew" <<endl;
+    cout <<"Mew mew mew" <<endl;
 }
 
 // This is how a specific creature gets its face.
