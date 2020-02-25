@@ -33,7 +33,7 @@ Animal::~Animal()
 void Animal::walk(Forest* f)
 {
     bool check = false;
-    int _x = x, _y = y;
+    int _x = x, _y = y, c=0;
     while(!check)
     {
         _x = x, _y = y;
@@ -47,6 +47,8 @@ void Animal::walk(Forest* f)
         }
         check = f->check(_x, _y);   // When making a step, first try the ground.
                                     // If it fails you, just try again.
+        c++;                        // But if you are out of time,
+        if (c>=20) break;           // maybe it is better to wait for another opportunity to make a step.
     }
     x = _x, y = _y;                 // Stepping to the safe forest ground.
 }

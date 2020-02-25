@@ -221,16 +221,31 @@ void Forest::draw()
         sf::Sprite *s = animals[i]->getSprite();
         if (!s) continue;
         s->setPosition(sf::Vector2f(animals[i]->get_x()*SX/(float)X, animals[i]->get_y()*SY/(float)Y));
-        s->setScale(sf::Vector2f(SX/200.0/X, SY/200.0/Y));
+        s->setScale(sf::Vector2f((SX/200.0)/X, (SY/200.0)/Y));
         window->draw(*s);
     }
 }
 
 // This is for animals, remember?
 // Looks like the forest is not as deceiving as some animals expected.
+// It even tells animals of other animals or plants being here.
 bool Forest::check(int x, int y)
 {
-    return x >= 0 && x < X && y >= 0 && y < Y;
+    if (x >= 0 && x < X && y >= 0 && y < Y)
+    {
+        for (int i=0; i<n_animals; i++) {
+
+
+
+            if(animals[i]->get_x()==x&&animals[i]->get_y()==y)
+                return 0;
+        }
+        for (int i=0; i<n_plants; i++)
+            if(plants[i]->get_x()==x&&plants[i]->get_y()==y)
+                return 0;
+    }
+    else return 0;
+    return 1;
 }
 
 // The polite part of the forest, where it gently asks all the animals to make a step.
