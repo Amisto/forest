@@ -3,6 +3,7 @@
 #include "Forest.h"
 #include "Cow.h"
 #include "Cat.h"
+#include "Lion.h"
 #include "Flower.h"
 #include "Sundew.h"
 
@@ -85,18 +86,36 @@ int Forest::init(int na, int np, int _X, int _Y)
     animals = new Animal*[n_animals];
     if (!animals) return 1;
     for (int i=0; i<n_animals; i++)
-    {
+       {
         int r = rand()%2;           // The amount of animals is given from beyond, but each animal can decide
                                     // what it wants to be.
         if (r)
         {
-            if (!(animals[i] = new Cow(1, 1)))
+            r = rand()%2;
+            if (r)
+            {
+                if (!(animals[i] = new Cow(1, 1)))
                 return 2;
+            }
+            else
+            {
+                if (!(animals[i] = new Lion(1, 1)))
+                return 2;
+            }
         }
         else
         {
-            if (!(animals[i] = new Cat(1, 1)))
-                return 3;
+            r = rand()%2;
+            if (r)
+            {
+                if (!(animals[i] = new Cat(1, 1)))
+                return 2;
+            }
+            else
+            {
+                if (!(animals[i] = new Lion(1, 1)))
+                return 2;
+            }
         }
     }
     n_plants = np;
