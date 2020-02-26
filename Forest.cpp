@@ -5,7 +5,7 @@
 #include "Cat.h"
 #include "Flower.h"
 #include "Sundew.h"
-
+#include "Mushroom.h"
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
@@ -88,15 +88,19 @@ int Forest::init(int na, int np, int _X, int _Y)
     {
         int r = rand()%2;           // The amount of animals is given from beyond, but each animal can decide
                                     // what it wants to be.
-        if (r)
+        switch(r) {
+        case 0:
         {
             if (!(animals[i] = new Cow(1, 1)))
                 return 2;
+            break;
         }
-        else
+        case 1:
         {
             if (!(animals[i] = new Cat(1, 1)))
                 return 3;
+            break;
+        }
         }
     }
     n_plants = np;
@@ -104,17 +108,32 @@ int Forest::init(int na, int np, int _X, int _Y)
     if (!plants) return 4;
     for (int i=0; i<n_plants; i++)
     {
-        int r = rand()%2;           // The amount of plants is also given from beyond, and each plant can also decide
-                                    // what it wants to be.
-        if (r)
-        {
+        int r = rand()%3;           // The amount of plants is also given from beyond, and each plant can also decide
+        switch (r) {
+        case 0:
+
+
             if (!(plants[i] = new Sundew(1)))
                 return 5;
-        }
-        else
-        {
+            break;
+
+
+        case 1:
+
+
             if (!(plants[i] = new Flower(1)))
                 return 6;
+            break;
+
+
+        case 2:
+
+            if (!(plants[i] = new Mushroom(1))) {
+
+                return 9;
+            }
+            break;
+
         }
     }
 
