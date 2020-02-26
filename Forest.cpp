@@ -272,4 +272,7 @@ void Forest::move()
     if (!animals) return;
     for (int i=0; i<n_animals; i++)
         animals[i]->walk(this);
+    if (!plants) return;
+    for (int i=0; i<n_plants; i++)
+        plants[i]->grow(this);
 }
