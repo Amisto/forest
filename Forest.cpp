@@ -233,18 +233,36 @@ bool Forest::check(int x, int y)
 {
     if (x >= 0 && x < X && y >= 0 && y < Y)
     {
+
         for (int i=0; i<n_animals; i++) {
-
-
-
-            if(animals[i]->get_x()==x&&animals[i]->get_y()==y)
-                return 0;
+        if(animals[i]->get_x()==x&&animals[i]->get_y()==y)
+            return 0;
         }
-        for (int i=0; i<n_plants; i++)
-            if(plants[i]->get_x()==x&&plants[i]->get_y()==y)
-                return 0;
+
+        for (int i=0; i<n_plants; i++) {
+        if(plants[i]->get_x()==x&&plants[i]->get_y()==y)
+            return 0;
+        }
     }
     else return 0;
+    return x >= 0 && x < X && y >= 0 && y < Y;
+}
+
+bool Forest::checkAnimals(int x, int y)
+{
+    for (int i=0; i<n_animals; i++) {
+        if(animals[i]->get_x()==x&&animals[i]->get_y()==y)
+            return 0;
+    }
+    return 1;
+}
+
+bool Forest::checkPlants(int x, int y)
+{
+    for (int i=0; i<n_plants; i++) {
+        if(plants[i]->get_x()==x&&plants[i]->get_y()==y)
+            return 0;
+    }
     return 1;
 }
 
