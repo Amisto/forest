@@ -43,14 +43,14 @@ void Mushroom::setSprite()
     if (!textureup)
     {
         textureup =new sf::Texture;
-        if(!(textureup->loadFromFile("res/mushroom_up.png")))
+        if(!(textureup->loadFromFile("res/mushrooms/mushroom_up.png")))
             cout << "Mushroom went wrong" << endl;
     }
 
         if (!texturedown)
     {
         texturedown =new sf::Texture;
-        if(!(texturedown->loadFromFile("res/mushroom_down.png")))
+        if(!(texturedown->loadFromFile("res/mushrooms/mushroom_down.png")))
             cout << "Mushroom went wrong" << endl;
     }
     s=new sf::Sprite;
