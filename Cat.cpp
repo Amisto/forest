@@ -55,7 +55,6 @@ void Cat::setSprite()
         {
             if (!texture[i].loadFromFile("res/cats/cat_"+to_string(i+1)+".png"))
             cout <<"Cat went wrong" <<endl;
-            else cout<<"res/cats/cat_"+to_string(i+1)+".png" << " is load\n";
         }
     }
 
