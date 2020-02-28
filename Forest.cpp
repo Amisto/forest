@@ -7,9 +7,11 @@
 #include "Flower.h"
 #include "Sundew.h"
 #include "Mushroom.h"
+
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
+
 using namespace std;
 
 // Pixie size of screen.
@@ -231,20 +233,20 @@ void Forest::draw()
         // Plants and animals are really trusting to let everyone meddle with their faces.
         // But this is most convenient for the forest.
 
-    for (int i=0; i<n_plants; i++)
+    for (int i = 0; i < n_plants; i++)
     {
         sf::Sprite *s = plants[i]->getSprite();
         if (!s) continue;
-        s->setPosition(sf::Vector2f(plants[i]->get_x()*SX/(float)X, plants[i]->get_y()*SY/(float)Y));
-        s->setScale(sf::Vector2f(SX/200.0/X, SY/200.0/Y));
+        s->setPosition(sf::Vector2f(plants[i]->get_x() * SX / (float)X, plants[i]->get_y() * SY / (float)Y));
+        s->setScale(sf::Vector2f(SX / 200.0 / X, SY / 200.0 / Y));
         window->draw(*s);
     }
-    for (int i=0; i<n_animals; i++)
+    for (int i = 0; i < n_animals; i++)
     {
         sf::Sprite *s = animals[i]->getSprite();
         if (!s) continue;
-        s->setPosition(sf::Vector2f(animals[i]->get_x()*SX/(float)X, animals[i]->get_y()*SY/(float)Y));
-        s->setScale(sf::Vector2f((SX/200.0)/X, (SY/200.0)/Y));
+        s->setPosition(sf::Vector2f(animals[i]->get_x() * SX/(float)X, animals[i]->get_y() * SY / (float)Y));
+        s->setScale(sf::Vector2f(SX / 200.0 / X, SY / 200.0 / Y));
         window->draw(*s);
     }
 }
@@ -257,13 +259,13 @@ bool Forest::check(int x, int y)
     if (x >= 0 && x < X && y >= 0 && y < Y)
     {
 
-        for (int i=0; i<n_animals; i++) {
-        if(animals[i]->get_x()==x&&animals[i]->get_y()==y)
+        for (int i = 0; i < n_animals; i++) {
+        if (animals[i]->get_x() == x && animals[i]->get_y() == y)
             return 0;
         }
 
-        for (int i=0; i<n_plants; i++) {
-        if(plants[i]->get_x()==x&&plants[i]->get_y()==y)
+        for (int i = 0; i < n_plants; i++) {
+        if(plants[i]->get_x() == x && plants[i]->get_y() == y)
             return 0;
         }
     }
@@ -273,8 +275,8 @@ bool Forest::check(int x, int y)
 
 bool Forest::checkAnimals(int x, int y)
 {
-    for (int i=0; i<n_animals; i++) {
-        if(animals[i]->get_x()==x&&animals[i]->get_y()==y)
+    for (int i = 0; i < n_animals; i++) {
+        if(animals[i]->get_x() == x && animals[i]->get_y() == y)
             return 0;
     }
     return 1;
@@ -282,8 +284,8 @@ bool Forest::checkAnimals(int x, int y)
 
 bool Forest::checkPlants(int x, int y)
 {
-    for (int i=0; i<n_plants; i++) {
-        if(plants[i]->get_x()==x&&plants[i]->get_y()==y)
+    for (int i = 0; i < n_plants; i++) {
+        if(plants[i]->get_x() == x && plants[i]->get_y() == y)
             return 0;
     }
     return 1;
@@ -293,9 +295,9 @@ bool Forest::checkPlants(int x, int y)
 void Forest::move()
 {
     if (!animals) return;
-    for (int i=0; i<n_animals; i++)
+    for (int i = 0; i < n_animals; i++)
         animals[i]->walk(this);
     if (!plants) return;
-    for (int i=0; i<n_plants; i++)
+    for (int i = 0; i < n_plants; i++)
         plants[i]->grow(this);
 }
