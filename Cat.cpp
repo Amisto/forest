@@ -1,9 +1,9 @@
 #include "Cat.h"
 #include <iostream>
 using namespace std;
-
+#include<string>
 #include <SFML/Graphics.hpp>
-
+#define TC 3
 sf::Texture* Cat::texture = NULL;
 
 Cat::Cat()
@@ -12,6 +12,11 @@ Cat::Cat()
 
 Cat::~Cat()
 {
+    if (texture)
+    {
+        delete[] texture;
+        texture=NULL;
+    }
 }
 
 
@@ -44,10 +49,15 @@ void Cat::setSprite()
 {
     if (!texture)
     {
-        texture = new sf::Texture;
-        if (!texture->loadFromFile("res/cat.png"))
+
+        texture = new sf::Texture[TC];
+        for (int i=0; i<TC; i++)
+        {
+            if (!texture[i].loadFromFile("res/cats/cat_"+to_string(i+1)+".png"))
             cout <<"Cat went wrong" <<endl;
+        }
     }
+
     s = new sf::Sprite;
-    s->setTexture(*texture);
+    s->setTexture(texture[rand()%3]);
 }

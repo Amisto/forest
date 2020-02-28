@@ -10,7 +10,7 @@ using namespace std;
 int main()
 {
     //It always pays up to do things in a proper way.
-    Forest* f = Forest::get_instance(20, 10, 15, 10);   // We try to initialize our Forest with
+    Forest* f = Forest::get_instance(10, 20, 30, 20);   // We try to initialize our Forest with
                                                     // animals/plants/cells along x/cells along y
     f->live();
     Forest::clear_instance();
