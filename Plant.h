@@ -9,6 +9,7 @@
 
 // You can make their life more fulfilling.
 
+class Forest;
 class Plant : public Creature
 {
     public:
@@ -17,6 +18,7 @@ class Plant : public Creature
         Plant(double m, int _x, int _y);
         ~Plant();
         virtual void gain_mass(double dm) final {Creature::set_mass(Creature::get_mass() + dm);}
+        virtual void grow(Forest* f);
     private:
 };
 

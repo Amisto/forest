@@ -1,8 +1,10 @@
 #include "Cow.h"
+
 #include <iostream>
+#include <SFML/Graphics.hpp>
+
 using namespace std;
 
-#include <SFML/Graphics.hpp>
 
 sf::Texture* Cow::texture = NULL;
 
@@ -21,6 +23,15 @@ Cow::Cow(double m, double b, int _x, int _y) : Animal(m, b, _x, _y)
 
 Cow::~Cow()
 {
+    // This is a very thin place of the Forest.
+    // Mind that if any Cow will be politely deleted she will be bully enough
+    // to take the cowkind common face with her.
+
+    if (texture)
+    {
+        delete texture;
+        texture = NULL;
+    }
 }
 
 void Cow::talk()
