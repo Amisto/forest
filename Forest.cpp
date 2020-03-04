@@ -7,7 +7,7 @@
 #include "Flower.h"
 #include "Sundew.h"
 #include "Mushroom.h"
-
+#include "Penguin.h"
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
@@ -105,8 +105,17 @@ int Forest::init(int na, int np, int _X, int _Y)
             break;
         }
         case 2:
+        {
             if (!(animals[i] = new Lion(1, 1)))
                 return 33;
+            break;
+        }
+        case 3:
+        {
+            if (!(animals[i] = new Penguin(1,1)))
+                return 4;
+            break;
+        }
         }
     }
     n_plants = np;
