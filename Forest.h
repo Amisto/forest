@@ -22,6 +22,8 @@ class Forest
         void draw();
         void live();
         bool check(int x, int y);
+        bool checkAnimals(int x, int y);
+        bool checkPlants(int x, int y);
         void move();
     private:
         Forest(); // Nobody can just take a forest and grow it on a backyard.

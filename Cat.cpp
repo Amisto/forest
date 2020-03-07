@@ -1,8 +1,12 @@
 #include "Cat.h"
-#include <iostream>
-using namespace std;
 
+#include <iostream>
+#include <string>
 #include <SFML/Graphics.hpp>
+
+#define TC 3
+
+using namespace std;
 
 sf::Texture* Cat::texture = NULL;
 
@@ -12,6 +16,15 @@ Cat::Cat()
 
 Cat::~Cat()
 {
+    // This is a very thin place of the Forest.
+    // Mind that if any Cat will be politely deleted she will be infuriated enough
+    // to take the catkind common face with her.
+
+    if (texture)
+    {
+        delete[] texture;
+        texture = NULL;
+    }
 }
 
 
@@ -44,10 +57,15 @@ void Cat::setSprite()
 {
     if (!texture)
     {
-        texture = new sf::Texture;
-        if (!texture->loadFromFile("res/cat.png"))
+
+        texture = new sf::Texture[TC];
+        for (int i = 0; i < TC; i++)
+        {
+            if (!texture[i].loadFromFile("res/cats/cat_" + std::to_string(i + 1) + ".png"))
             cout <<"Cat went wrong" <<endl;
+        }
     }
+
     s = new sf::Sprite;
-    s->setTexture(*texture);
+    s->setTexture(texture[rand()%3]);
 }

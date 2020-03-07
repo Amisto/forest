@@ -3,12 +3,17 @@
 #include "Forest.h"
 #include "Cow.h"
 #include "Cat.h"
+#include "Lion.h"
 #include "Flower.h"
 #include "Sundew.h"
-
+#include "Mushroom.h"
+#include "Penguin.h"
+#include "Fish.h"
+#include "Sparrow.h"
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
+
 using namespace std;
 
 // Pixie size of screen.
@@ -86,17 +91,45 @@ int Forest::init(int na, int np, int _X, int _Y)
     if (!animals) return 1;
     for (int i=0; i<n_animals; i++)
     {
-        int r = rand()%2;           // The amount of animals is given from beyond, but each animal can decide
+        int r = rand()%6;           // The amount of animals is given from beyond, but each animal can decide
                                     // what it wants to be.
-        if (r)
+        switch(r) {
+        case 0:
         {
             if (!(animals[i] = new Cow(1, 1)))
                 return 2;
+            break;
         }
-        else
+        case 1:
         {
             if (!(animals[i] = new Cat(1, 1)))
                 return 3;
+            break;
+        }
+        case 2:
+        {
+            if (!(animals[i] = new Lion(1, 1)))
+                return 33;
+            break;
+        }
+        case 3:
+        {
+            if (!(animals[i] = new Penguin(1,1)))
+                return 4;
+            break;
+        }
+        case 4:
+        {
+            if (!(animals[i] = new Fish(1,1)))
+                return 0;
+            break;
+        }
+        case 5:
+        {
+            if (!(animals[i] = new Sparrow(1,1)))
+                return 0;
+            break;
+        }
         }
     }
     n_plants = np;
@@ -104,17 +137,32 @@ int Forest::init(int na, int np, int _X, int _Y)
     if (!plants) return 4;
     for (int i=0; i<n_plants; i++)
     {
-        int r = rand()%2;           // The amount of plants is also given from beyond, and each plant can also decide
-                                    // what it wants to be.
-        if (r)
-        {
+        int r = rand()%3;           // The amount of plants is also given from beyond, and each plant can also decide
+        switch (r) {
+        case 0:
+
+
             if (!(plants[i] = new Sundew(1)))
                 return 5;
-        }
-        else
-        {
+            break;
+
+
+        case 1:
+
+
             if (!(plants[i] = new Flower(1)))
                 return 6;
+            break;
+
+
+        case 2:
+
+            if (!(plants[i] = new Mushroom(1))) {
+
+                return 9;
+            }
+            break;
+
         }
     }
 
@@ -208,35 +256,71 @@ void Forest::draw()
         // Plants and animals are really trusting to let everyone meddle with their faces.
         // But this is most convenient for the forest.
 
-    for (int i=0; i<n_plants; i++)
+    for (int i = 0; i < n_plants; i++)
     {
         sf::Sprite *s = plants[i]->getSprite();
         if (!s) continue;
-        s->setPosition(sf::Vector2f(plants[i]->get_x()*SX/(float)X, plants[i]->get_y()*SY/(float)Y));
-        s->setScale(sf::Vector2f(SX/200.0/X, SY/200.0/Y));
+        s->setPosition(sf::Vector2f(plants[i]->get_x() * SX / (float)X, plants[i]->get_y() * SY / (float)Y));
+        s->setScale(sf::Vector2f(SX / 200.0 / X, SY / 200.0 / Y));
         window->draw(*s);
     }
-    for (int i=0; i<n_animals; i++)
+    for (int i = 0; i < n_animals; i++)
     {
         sf::Sprite *s = animals[i]->getSprite();
         if (!s) continue;
-        s->setPosition(sf::Vector2f(animals[i]->get_x()*SX/(float)X, animals[i]->get_y()*SY/(float)Y));
-        s->setScale(sf::Vector2f(SX/200.0/X, SY/200.0/Y));
+        s->setPosition(sf::Vector2f(animals[i]->get_x() * SX/(float)X, animals[i]->get_y() * SY / (float)Y));
+        s->setScale(sf::Vector2f(SX / 200.0 / X, SY / 200.0 / Y));
         window->draw(*s);
     }
 }
 
 // This is for animals, remember?
 // Looks like the forest is not as deceiving as some animals expected.
+// It even tells animals of other animals or plants being here.
 bool Forest::check(int x, int y)
 {
+    if (x >= 0 && x < X && y >= 0 && y < Y)
+    {
+
+        for (int i = 0; i < n_animals; i++) {
+        if (animals[i]->get_x() == x && animals[i]->get_y() == y)
+            return 0;
+        }
+
+        for (int i = 0; i < n_plants; i++) {
+        if(plants[i]->get_x() == x && plants[i]->get_y() == y)
+            return 0;
+        }
+    }
+    else return 0;
     return x >= 0 && x < X && y >= 0 && y < Y;
+}
+
+bool Forest::checkAnimals(int x, int y)
+{
+    for (int i = 0; i < n_animals; i++) {
+        if(animals[i]->get_x() == x && animals[i]->get_y() == y)
+            return 0;
+    }
+    return 1;
+}
+
+bool Forest::checkPlants(int x, int y)
+{
+    for (int i = 0; i < n_plants; i++) {
+        if(plants[i]->get_x() == x && plants[i]->get_y() == y)
+            return 0;
+    }
+    return 1;
 }
 
 // The polite part of the forest, where it gently asks all the animals to make a step.
 void Forest::move()
 {
     if (!animals) return;
-    for (int i=0; i<n_animals; i++)
+    for (int i = 0; i < n_animals; i++)
         animals[i]->walk(this);
+    if (!plants) return;
+    for (int i = 0; i < n_plants; i++)
+        plants[i]->grow(this);
 }
