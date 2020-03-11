@@ -131,6 +131,7 @@ int Forest::init(int na, int np, int _X, int _Y)
                 return 0;
             break;
         }
+        }
     }
     n_plants = np;
     plants = new Plant*[n_plants];
