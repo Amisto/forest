@@ -10,6 +10,7 @@
 #include "Penguin.h"
 #include "Fish.h"
 #include "Sparrow.h"
+
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
@@ -129,7 +130,6 @@ int Forest::init(int na, int np, int _X, int _Y)
             if (!(animals[i] = new Sparrow(1,1)))
                 return 0;
             break;
-        }
         }
     }
     n_plants = np;
