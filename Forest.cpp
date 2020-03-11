@@ -12,6 +12,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+int plans_X = 0;
+int plans_Y = 0;
 using namespace std;
 
 // Pixie size of screen.
@@ -84,13 +86,17 @@ void Forest::listen()
 
 int Forest::init(int na, int np, int _X, int _Y)
 {
+    plans_X = _X;
+    plans_Y = _Y;
+
     n_animals = na;
     animals = new Animal*[n_animals];
     if (!animals) return 1;
     for (int i=0; i<n_animals; i++)
     {
-        int r = rand()%3;           // The amount of animals is given from beyond, but each animal can decide
+        int r = rand()%4;           // The amount of animals is given from beyond, but each animal can decide
                                     // what it wants to be.
+                                    //To have penguins, we should take %4
         switch(r) {
         case 0:
         {
@@ -204,6 +210,162 @@ int Forest::init(int na, int np, int _X, int _Y)
     return 0;
 }
 
+int Forest::grow()
+{
+    n_plants++;
+    plants = new Plant*[n_plants];
+    if (!plants) return 4;
+    for (int i=0; i<n_plants; i++)
+    {
+        int r = rand()%3;           // The amount of plants is also given from beyond, and each plant can also decide
+        switch (r) {
+        case 0:
+
+
+            if (!(plants[i] = new Sundew(1)))
+                return 5;
+            break;
+
+
+        case 1:
+
+
+            if (!(plants[i] = new Flower(1)))
+                return 6;
+            break;
+
+
+        case 2:
+
+            if (!(plants[i] = new Mushroom(1))) {
+
+                return 9;
+            }
+            break;
+
+        }
+    }
+int ia = 0, ip = 0, _x, _y;
+
+
+    X = plans_X, Y = plans_Y;
+
+    // We try to set them apart from each other.
+    bool **taken;
+    taken = new bool*[X];
+    if (!taken) return 7;
+    for (int i=0; i<X; i++)
+        if (!(taken[i] = new bool[Y]))
+            return 8;
+
+    for (int i=0; i<X; i++)
+        for (int j=0; j<Y; j++)
+            taken[i][j] = false;
+
+    while (ip < n_plants)
+    {
+        // Looking through all the animals and plants, one at a time, and finding each one a cozy spot.
+        // It might take time if the forest is small and crowded.
+        _x = rand()%X;
+        _y = rand()%Y;
+        if (taken[_x][_y]) continue;
+        plants[ip]->set_x(_x);
+        plants[ip]->set_y(_y);
+        plants[ip]->setSprite();
+        taken[_x][_y] = true;
+        ip++;
+    }
+    for (int i=0; i<X; i++)
+        delete[] taken[i];
+    delete taken;
+
+   /* sf::ContextSettings contextSettings;
+    contextSettings.depthBits = 24;
+    window = new sf::RenderWindow(sf::VideoMode(SX, SY), "Forest", sf::Style::Default, contextSettings);
+    window->setActive();
+*/
+    return 0;
+}
+
+int Forest::less()
+{
+    n_plants--;
+    plants = new Plant*[n_plants];
+    if (!plants) return 4;
+    for (int i=0; i<n_plants; i++)
+    {
+        int r = rand()%3;           // The amount of plants is also given from beyond, and each plant can also decide
+        switch (r) {
+        case 0:
+
+
+            if (!(plants[i] = new Sundew(1)))
+                return 5;
+            break;
+
+
+        case 1:
+
+
+            if (!(plants[i] = new Flower(1)))
+                return 6;
+            break;
+
+
+        case 2:
+
+            if (!(plants[i] = new Mushroom(1))) {
+
+                return 9;
+            }
+            break;
+
+        }
+    }
+int ia = 0, ip = 0, _x, _y;
+
+
+    X = plans_X, Y = plans_Y;
+
+    // We try to set them apart from each other.
+    bool **taken;
+    taken = new bool*[X];
+    if (!taken) return 7;
+    for (int i=0; i<X; i++)
+        if (!(taken[i] = new bool[Y]))
+            return 8;
+
+    for (int i=0; i<X; i++)
+        for (int j=0; j<Y; j++)
+            taken[i][j] = false;
+
+    while (ip < n_plants)
+    {
+        // Looking through all the animals and plants, one at a time, and finding each one a cozy spot.
+        // It might take time if the forest is small and crowded.
+        _x = rand()%X;
+        _y = rand()%Y;
+        if (taken[_x][_y]) continue;
+        plants[ip]->set_x(_x);
+        plants[ip]->set_y(_y);
+        plants[ip]->setSprite();
+        taken[_x][_y] = true;
+        ip++;
+    }
+    for (int i=0; i<X; i++)
+        delete[] taken[i];
+    delete taken;
+
+   /* sf::ContextSettings contextSettings;
+    contextSettings.depthBits = 24;
+    window = new sf::RenderWindow(sf::VideoMode(SX, SY), "Forest", sf::Style::Default, contextSettings);
+    window->setActive();
+*/
+    return 0;
+}
+
+
+
 void Forest::live()
 {
     if (!window || !animals || !plants) return; // Playing safe.
@@ -225,9 +387,35 @@ void Forest::live()
             {
                 move();
                 key_pressed = true;
+
             }
         }
+        else
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+        {
+            if (!key_pressed)
+            {
+                grow();
+            key_pressed = true;
+            }
+        }
+        else
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+        {
+            if (!key_pressed)
+            {
+                less();
+            key_pressed = true;
+            }
+        }
+
         else key_pressed = false;
+
+
+
+        //else key_pressed = false;
+
+
 
         window->clear(sf::Color(0,50,0));  // Evergreen forest is behind all the things here.
         draw();
@@ -310,3 +498,5 @@ void Forest::move()
     for (int i = 0; i < n_plants; i++)
         plants[i]->grow(this);
 }
+
+
