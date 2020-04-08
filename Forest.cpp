@@ -8,6 +8,9 @@
 #include "Sundew.h"
 #include "Mushroom.h"
 #include "Penguin.h"
+#include "Fish.h"
+#include "Sparrow.h"
+
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
@@ -94,7 +97,7 @@ int Forest::init(int na, int np, int _X, int _Y)
     if (!animals) return 1;
     for (int i=0; i<n_animals; i++)
     {
-        int r = rand()%4;           // The amount of animals is given from beyond, but each animal can decide
+        int r = rand()%6;           // The amount of animals is given from beyond, but each animal can decide
                                     // what it wants to be.
                                     //To have penguins, we should take %4
         switch(r) {
@@ -120,6 +123,18 @@ int Forest::init(int na, int np, int _X, int _Y)
         {
             if (!(animals[i] = new Penguin(1,1)))
                 return 4;
+            break;
+        }
+        case 4:
+        {
+            if (!(animals[i] = new Fish(1,1)))
+                return 0;
+            break;
+        }
+        case 5:
+        {
+            if (!(animals[i] = new Sparrow(1,1)))
+                return 0;
             break;
         }
         }
