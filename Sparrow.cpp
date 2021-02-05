@@ -23,7 +23,7 @@ Sparrow::~Sparrow() {
 }
 
 void Sparrow::talk() {
-    cout <<"Chirick chirick" <<endl;
+    cout <<"Chirick chirick chirick" <<endl;
 }
 
 void Sparrow::setSprite() {
